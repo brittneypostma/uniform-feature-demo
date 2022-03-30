@@ -4,6 +4,13 @@
 
 <script lang="ts">
 	import Counter from '$lib/Counter.svelte';
+	import { getCompositionData } from '$lib/helper';
+	export let composition;
+
+	let data = [];
+
+	// getCompositionData(composition);
+	console.log(composition);
 </script>
 
 <svelte:head>
@@ -11,24 +18,24 @@
 </svelte:head>
 
 <section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</div>
+	<div class="welcome">
+		<picture>
+			<source srcset="svelte-welcome.webp" type="image/webp" />
+			<img src="svelte-welcome.png" alt="Welcome" />
+		</picture>
+	</div>
+	<h1>{composition.slots.content[0].slots.pz[0].parameters.title.value}</h1>
 
-		to your new<br />SvelteKit app
-	</h1>
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
+	<pre>{JSON.stringify(composition, null, 2)}</pre>
 
 	<Counter />
 </section>
 
 <style>
+	pre {
+		white-space: pre-wrap;
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
@@ -45,6 +52,7 @@
 		position: relative;
 		width: 100%;
 		height: 0;
+		margin: 2rem 0 0;
 		padding: 0 0 calc(100% * 495 / 2048) 0;
 	}
 
